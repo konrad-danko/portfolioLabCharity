@@ -108,19 +108,19 @@
             Możesz sprawdzić czym się zajmują.</p>
 
         <ul class="help--slides-items">
-            <c:forEach items="${institutionList}"  varStatus="counter" step="2" begin="0" end="${institutionList.size()-1}">
+            <c:forEach items="${allInstitutions}"  varStatus="counter" step="2" begin="0" end="${allInstitutions.size()-1}">
                 <li>
                     <div class="col">
-                        <div class="title">${institutionList.get(counter.index).name}</div>
-                        <div class="subtitle">${institutionList.get(counter.index).description}</div>
+                        <div class="title">${allInstitutions.get(counter.index).name}</div>
+                        <div class="subtitle">${allInstitutions.get(counter.index).description}</div>
                     </div>
-                    <c:if test="${(counter.index + 1)<=(institutionList.size()-1)}">
+                    <c:if test="${(counter.index + 1)<=(allInstitutions.size()-1)}">
                         <div class="col">
-                            <div class="title">${institutionList.get(counter.index + 1).name}</div>
-                            <div class="subtitle">${institutionList.get(counter.index + 1).description}</div>
+                            <div class="title">${allInstitutions.get(counter.index + 1).name}</div>
+                            <div class="subtitle">${allInstitutions.get(counter.index + 1).description}</div>
                         </div>
                     </c:if>
-                    <c:if test="${(counter.index + 1)>(institutionList.size()-1)}">
+                    <c:if test="${(counter.index + 1)>(allInstitutions.size()-1)}">
                         <div></div>
                     </c:if>
                 </li>

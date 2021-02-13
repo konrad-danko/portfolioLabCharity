@@ -1,5 +1,7 @@
 package pl.coderslab.charity.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
@@ -45,6 +47,7 @@ public class Donation {
     private String zipCode;
 
     @FutureOrPresent(message = "Data nie może być z przeszłości")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate pickUpDate; // (LocalDate)
 
     @NotNull(message = "Wpisz godzinę odbioru darów")
