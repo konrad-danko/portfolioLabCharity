@@ -46,6 +46,12 @@ public class Donation {
     @NotBlank(message = "Pole nie może być puste")
     private String zipCode;
 
+    @Column(nullable = false)
+    @Pattern(regexp = "^\\d{9}$", message = "Wpisz nr telefonu w formacie 111222333")
+    @NotBlank(message = "Pole nie może być puste")
+    private String phoneNumber;
+
+    @NotNull(message = "Wpisz datę odbioru darów")
     @FutureOrPresent(message = "Data nie może być z przeszłości")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate pickUpDate; // (LocalDate)
@@ -107,6 +113,13 @@ public class Donation {
         this.zipCode = zipCode;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public LocalDate getPickUpDate() {
         return pickUpDate;
     }
@@ -138,10 +151,10 @@ public class Donation {
                 ", street='" + street + '\'' +
                 ", city='" + city + '\'' +
                 ", zipCode='" + zipCode + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
                 ", pickUpDate=" + pickUpDate +
                 ", pickUpTime=" + pickUpTime +
                 ", pickUpComment='" + pickUpComment + '\'' +
                 '}';
     }
 }
-
