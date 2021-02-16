@@ -63,7 +63,7 @@
                                 <input type="checkbox" name="categories" value="${item.id}"
                                     ${donation.categories.contains(item) ? "checked" : ""}/>
                                 <span class="checkbox"></span>
-                                <span class="description">${item.name}</span>
+                                <span class="description categoryDescription">${item.name}</span>
                                 <form:checkbox path="categories" value="${item.id}"/>
                             </label>
                         </div>
@@ -80,7 +80,7 @@
                     <div class="form-group form-group--inline">
                         <label>
                             Liczba 60l worków:
-                            <form:input path="quantity" type="number" step="1" min="1"/>
+                            <form:input path="quantity" type="number" step="1" min="1" id="numberOfBags"/>
                         </label>
                     </div>
                     <div class="form-group form-group--buttons">
@@ -100,7 +100,7 @@
                                     ${donation.institution.equals(item) ? "checked" : ""}/>
                                 <span class="checkbox radio"></span>
                                 <span class="description">
-                                    <div class="title">${item.name}</div>
+                                    <div class="title institutionTitle">${item.name}</div>
                                     <div class="subtitle">${item.description}</div>
                                 </span>
                                 <form:radiobutton path="institution" value="${item.id}"/>
@@ -120,41 +120,41 @@
                         <div class="form-section--column">
                             <h4>Adres odbioru</h4>
                             <div class="form-group form-group--inline">
-                                <label> Ulica <form:input path="street"/> </label>
+                                <label> Ulica <form:input path="street" id="donationStreet"/> </label>
                                 <span style="color:Red; font-size:1.8em"><form:errors path="street"/></span>
                             </div>
                             <div class="form-group form-group--inline">
-                                <label> Miasto <form:input path="city"/> </label>
+                                <label> Miasto <form:input path="city" id="donationCity"/> </label>
                                 <span style="color:Red; font-size:1.8em"><form:errors path="city"/></span>
                             </div>
                             <div class="form-group form-group--inline">
-                                <label> Kod pocztowy <form:input path="zipCode"/> </label>
+                                <label> Kod pocztowy <form:input path="zipCode" id="donationZipCode"/> </label>
                                 <span style="color:Red; font-size:1.8em"><form:errors path="zipCode"/></span>
                             </div>
                             <div class="form-group form-group--inline">
-                                <label> Numer telefonu <form:input path="phoneNumber"/> </label>
+                                <label> Numer telefonu <form:input path="phoneNumber" id="donationPhoneNumber"/> </label>
                                 <span style="color:Red; font-size:1.8em"><form:errors path="phoneNumber"/></span>
                             </div>
                         </div>
                         <div class="form-section--column">
                             <h4>Termin odbioru</h4>
                             <div class="form-group form-group--inline">
-                                <label> Data <form:input type="date" path="pickUpDate"/> </label>
+                                <label> Data <form:input type="date" path="pickUpDate" id="donationPickUpDate"/> </label>
                                 <span style="color:Red; font-size:1.8em"><form:errors path="pickUpDate"/></span>
                             </div>
                             <div class="form-group form-group--inline">
-                                <label> Godzina <form:input type="time" path="pickUpTime"/> </label>
+                                <label> Godzina <form:input type="time" path="pickUpTime" id="donationPickUpTime"/> </label>
                                 <span style="color:Red; font-size:1.8em"><form:errors path="pickUpTime"/></span>
                             </div>
                             <div class="form-group form-group--inline">
-                                <label> Uwagi dla kuriera <form:textarea path="pickUpComment" rows="5"/> </label>
+                                <label> Uwagi dla kuriera <form:textarea path="pickUpComment" id="donationPickUpComment" rows="5"/> </label>
                                 <span style="color:Red; font-size:1.8em"><form:errors path="pickUpComment"/></span>
                             </div>
                         </div>
                     </div>
                     <div class="form-group form-group--buttons">
                         <button type="button" class="btn prev-step">Wstecz</button>
-                        <button type="button" class="btn next-step">Dalej</button>
+                        <button type="button" class="btn next-step" id="finalNextButton">Dalej</button>
                     </div>
                 </div>
 
@@ -168,12 +168,12 @@
                             <ul>
                                 <li>
                                     <span class="icon icon-bag"></span>
-                                    <span class="summary--text">4 worki ubrań w dobrym stanie dla dzieci</span>
+                                    <span class="summary--text" id="bagsAndCategoriesTargetElement">??</span>
                                 </li>
 
                                 <li>
                                     <span class="icon icon-hand"></span>
-                                    <span class="summary--text">Dla fundacji "Mam marzenie" w Warszawie</span>
+                                    <span class="summary--text" id="institutionNameTargetElement">??</span>
                                 </li>
                             </ul>
                         </div>
@@ -182,19 +182,19 @@
                             <div class="form-section--column">
                                 <h4>Adres odbioru:</h4>
                                 <ul>
-                                    <li>Prosta 51</li>
-                                    <li>Warszawa</li>
-                                    <li>99-098</li>
-                                    <li>123 456 789</li>
+                                    <li id="donationStreetTargetElement">??</li>
+                                    <li id="donationCityTargetElement">??</li>
+                                    <li id="donationZipCodeTargetElement">??</li>
+                                    <li id="donationPhoneNumberTargetElement">??</li>
                                 </ul>
                             </div>
 
                             <div class="form-section--column">
                                 <h4>Termin odbioru:</h4>
                                 <ul>
-                                    <li>13/12/2018</li>
-                                    <li>15:40</li>
-                                    <li>Brak uwag</li>
+                                    <li id="donationPickUpDateTargetElement">??</li>
+                                    <li id="donationPickUpTimeTargetElement">??</li>
+                                    <li id="donationPickUpCommentTargetElement">??</li>
                                 </ul>
                             </div>
                         </div>
@@ -212,5 +212,6 @@
     <%@include file="footer.jsp"%>
 
     <script src="<c:url value="../resources/js/app.js"/>"></script>
+    <script src="<c:url value="../resources/js/appForm.js"/>"></script>
     </body>
 </html>
