@@ -1,5 +1,7 @@
 package pl.coderslab.charity.controller;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,10 @@ public class HomeController {
 
     @RequestMapping("/")
     public String homeAction(Model model){
+
+        //to jest ciekawa sprawa:
+        //https://docs.spring.io/spring-security/site/docs/3.0.x/reference/taglibs.html
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         int numberOfBags = donationRepository.findAll()
                 .stream()
