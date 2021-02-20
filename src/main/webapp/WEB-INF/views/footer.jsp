@@ -22,6 +22,8 @@
 
             <div class="form-group"><textarea name="message" placeholder="Wiadomość" rows="1"></textarea></div>
 
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
             <button class="btn" type="submit">Wyślij</button>
         </form>
     </div>
