@@ -21,8 +21,9 @@
 
             <form method="post">
                 <div class="form-group">
-                    <%--<input type="email" name="email" placeholder="Email" autofocus/>--%>
-                    <input type="text" name="username" placeholder="Username" autofocus/>
+                    <%--Ten input MUSI się nazywać 'username', bo pod taką nazwą odczytuje go Spring i podstawia
+                    jako argument metody loadUserByUsername() w klasie SpringDataUserDetailsService.--%>
+                    <input type="email" name="username" placeholder="Email" autofocus/>
                 </div>
 
                 <div class="form-group">
