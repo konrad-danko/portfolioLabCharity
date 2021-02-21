@@ -18,7 +18,7 @@
     <sec:authorize access="isAuthenticated()">
         <ul class="nav--actions">
             <li class="logged-user">
-                Witaj <sec:authentication property="principal.username"/> jako <sec:authentication property="authorities"/>
+                Witaj <sec:authentication property="principal.user.firstName"/>
                 <ul class="dropdown">
                     <li><a href="#">Profil</a></li>
                     <li><a href="#">Moje zbiórki</a></li>
