@@ -33,7 +33,7 @@ public class InstitutionController {
     }
 
     @GetMapping(path = "/showAllInstitutions")
-    public String showAllCustomers(Model model) {
+    public String showAllInstitutions(Model model) {
         model.addAttribute("allInstitutions", institutionRepository.findAllOrderedByName());
         return "admin/adminAllInstitutions";
     }
