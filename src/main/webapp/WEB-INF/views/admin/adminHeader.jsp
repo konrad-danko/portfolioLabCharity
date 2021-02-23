@@ -24,10 +24,10 @@
             <a href="/admin/institution/showAllInstitutions" class="btn btn-info mx-2">Fundacje</a>
         </li>
         <li class="nav-item">
-            <a href="/admin/admin/showAllAdmins" class="btn btn-info mx-2">Administratorzy</a>
+            <a href="/admin/user/showAllUsers/1" class="btn btn-info mx-2">Administratorzy</a>
         </li>
         <li class="nav-item">
-            <a href="/admin/user/showAllUsers" class="btn btn-info mx-2">Użytkownicy</a>
+            <a href="/admin/user/showAllUsers/2" class="btn btn-info mx-2">Darczyńcy</a>
         </li>
     </ul>
 
