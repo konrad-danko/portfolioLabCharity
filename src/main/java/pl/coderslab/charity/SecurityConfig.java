@@ -24,6 +24,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().formLogin().loginPage("/login")
                 .and().logout().logoutSuccessUrl("/")
                 .permitAll();
+        // If a user try to access a resource without having enough permissions
+        http.exceptionHandling().accessDeniedPage("/");
     }
 
     @Bean
