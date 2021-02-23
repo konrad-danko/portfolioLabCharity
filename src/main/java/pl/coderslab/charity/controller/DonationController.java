@@ -1,5 +1,6 @@
 package pl.coderslab.charity.controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,6 +14,7 @@ import pl.coderslab.charity.model.Institution;
 import pl.coderslab.charity.repository.CategoryRepository;
 import pl.coderslab.charity.repository.DonationRepository;
 import pl.coderslab.charity.repository.InstitutionRepository;
+import pl.coderslab.charity.service.CurrentUser;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -40,6 +42,11 @@ public class DonationController {
     @ModelAttribute("allInstitutions")
     public List<Institution> getAllInstitutions(){
         return this.institutionRepository.findAllOrderedByName();
+    }
+
+    @ModelAttribute("firstName")
+    public String getFirstName(@AuthenticationPrincipal CurrentUser customUser){
+        return customUser==null ? "" :customUser.getUser().getFirstName();
     }
 
     //add a donation
