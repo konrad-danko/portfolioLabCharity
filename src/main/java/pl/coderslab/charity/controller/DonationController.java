@@ -51,8 +51,11 @@ public class DonationController {
 
     //add a donation
     @GetMapping(path = "/addDonation")
-    public String initiateAddDonation(Model model) {
-        model.addAttribute("donation", new Donation());
+    public String initiateAddDonation(Model model,
+                                      @AuthenticationPrincipal CurrentUser customUser) {
+        Donation donation = new Donation();
+        donation.setUser(customUser.getUser());
+        model.addAttribute("donation", donation);
         return "form";
     }
     @PostMapping(path = "/addDonation")
