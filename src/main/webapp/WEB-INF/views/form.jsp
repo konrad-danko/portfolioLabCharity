@@ -204,6 +204,8 @@
                             <button type="submit" class="btn">Potwierdzam</button>
                         </div>
                     </div>
+
+                    <form:hidden path="user"/>
                 </form:form>
             </div>
         </section>
