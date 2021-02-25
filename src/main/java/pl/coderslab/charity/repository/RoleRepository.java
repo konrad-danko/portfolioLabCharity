@@ -6,5 +6,5 @@ import pl.coderslab.charity.model.Role;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Integer> {
-    Role findByRoleName(String roleName);
+    Role findById(int id);
 }
