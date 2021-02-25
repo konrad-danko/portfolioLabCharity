@@ -62,8 +62,11 @@ public class Donation {
     @Size(max = 255, message = "Dopuszczalna ilość znaków wynosi 255")
     private String pickUpComment;
 
+    @NotNull
+    @ManyToOne
+    private User user;
 
-    
+
     public Long getId() {
         return id;
     }
@@ -141,6 +144,13 @@ public class Donation {
         this.pickUpComment = pickUpComment;
     }
 
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "Donation{" +
@@ -155,6 +165,7 @@ public class Donation {
                 ", pickUpDate=" + pickUpDate +
                 ", pickUpTime=" + pickUpTime +
                 ", pickUpComment='" + pickUpComment + '\'' +
+                ", user=" + user +
                 '}';
     }
 }
