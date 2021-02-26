@@ -98,10 +98,7 @@ public class UserController {
         }
         //jeśli w bazie jest jeden jedyny admin to nie można odebrać mu praw admina:
         boolean isOnlyOneAdmin = userRepository.findAllUsersByRoleIdOrderedByLastName(1).size()==1;
-        boolean isAnAdmin = userRepository.findById(id)
-                .get()
-                .getRole()
-                .getId()==1;
+        boolean isAnAdmin = userRepository.findById(id).get().getRole().getId()==1;
         boolean toBeNonAdmin = user.getRole().getId()!=1;
         if(isOnlyOneAdmin && isAnAdmin && toBeNonAdmin){
             return "redirect:/admin/user/showUser/"+user.getId();
