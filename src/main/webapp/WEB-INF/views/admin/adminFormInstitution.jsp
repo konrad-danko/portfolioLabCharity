@@ -15,7 +15,7 @@
 </head>
 <body>
 <div class="container-fluid">
-    <%@ include file="adminHeader.jsp" %>
+    <%@ include file="adminHeaderAdmin.jsp" %>
 
     <div class="d-flex justify-content-center">
         <div style="width:90%">

@@ -42,7 +42,7 @@ public class HomeController {
         model.addAttribute("allInstitutions", institutionRepository.findAllOrderedByName());
 
         if ("ROLE_ADMIN".equals(roleName)) {
-            return "admin/adminMainPage";
+            return "admin/adminMainPageAdmin";
         }
         return "index";
     }

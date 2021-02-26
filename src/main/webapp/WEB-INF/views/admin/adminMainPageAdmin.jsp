@@ -16,7 +16,7 @@
 <body>
 <div class="container-fluid">
 
-    <%@ include file="adminHeader.jsp" %>
+    <%@ include file="adminHeaderAdmin.jsp" %>
     <br>
     <br>
     <br>
