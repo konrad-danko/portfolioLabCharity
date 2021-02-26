@@ -36,6 +36,8 @@ public class User {
     @ManyToOne
     private Role role;
 
+    private int enabled;
+
     public Long getId() {
         return id;
     }
@@ -78,6 +80,13 @@ public class User {
         this.role = role;
     }
 
+    public int getEnabled() {
+        return enabled;
+    }
+    public void setEnabled(int enabled) {
+        this.enabled = enabled;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -87,6 +96,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", role=" + role +
+                ", enabled=" + enabled +
                 '}';
     }
 }
