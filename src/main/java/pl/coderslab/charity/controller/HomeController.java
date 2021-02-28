@@ -26,7 +26,7 @@ public class HomeController {
     public String homeAction(Model model, @AuthenticationPrincipal CurrentUser customUser){
 
         String firstName = customUser==null ? "" :customUser.getUser().getFirstName();
-        String roleName = customUser==null ? "" :customUser.getUser().getRole().getRoleName();
+        int roleId = customUser==null ? 0 :customUser.getUser().getRole().getId();
 
         //to jest też ciekawa sprawa:
         //https://docs.spring.io/spring-security/site/docs/3.0.x/reference/taglibs.html
@@ -41,8 +41,11 @@ public class HomeController {
         model.addAttribute("numberOfDonations", donationRepository.count());
         model.addAttribute("allInstitutions", institutionRepository.findAllOrderedByName());
 
-        if ("ROLE_ADMIN".equals(roleName)) {
+        if (roleId==1) {
             return "admin/adminMainPageAdmin";
+        }
+        if (roleId==2) {
+            return "redirect:/donator/home";
         }
         return "index";
     }
