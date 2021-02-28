@@ -43,8 +43,7 @@ public class DonatorController {
     public String showHomePage(Model model, @AuthenticationPrincipal CurrentUser customUser){
 
         long userId = customUser.getUser().getId();
-        model.addAttribute("allDonations", donationRepository.findAllByUser_Id(userId));
-
+        model.addAttribute("allDonations", donationRepository.getUserDonationsSorted(userId));
         return "admin/adminMainPageDonator";
     }
 
