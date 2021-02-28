@@ -14,7 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <title>Formularz</title>
-    <%--<link rel="stylesheet" href="<c:url value="../resources/css/style.css"/>"/>--%>
+    <link rel="stylesheet" href="<c:url value="../resources/css/style.css"/>"/>
 </head>
 <body>
 <%@ include file="adminHeaderDonator.jsp" %>
