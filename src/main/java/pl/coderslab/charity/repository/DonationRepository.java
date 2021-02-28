@@ -14,7 +14,7 @@ public interface DonationRepository extends JpaRepository<Donation, Long> {
     List<Donation> findAllByUser_Id(long id);
 
     String sqlQueryGetUserDonationsSorted = "select * from donations\n" +
-            "where user_id=6\n" +
+            "where user_id=?1\n" +
             "order by\n" +
             "donation_status_id,\n" +
             "pick_up_date desc,\n" +
