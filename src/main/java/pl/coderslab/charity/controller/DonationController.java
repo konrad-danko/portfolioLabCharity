@@ -13,6 +13,7 @@ import pl.coderslab.charity.model.Donation;
 import pl.coderslab.charity.model.Institution;
 import pl.coderslab.charity.repository.CategoryRepository;
 import pl.coderslab.charity.repository.DonationRepository;
+import pl.coderslab.charity.repository.DonationStatusRepository;
 import pl.coderslab.charity.repository.InstitutionRepository;
 import pl.coderslab.charity.service.CurrentUser;
 
@@ -26,12 +27,15 @@ public class DonationController {
     private final DonationRepository donationRepository;
     private final InstitutionRepository institutionRepository;
     private final CategoryRepository categoryRepository;
+    private final DonationStatusRepository donationStatusRepository;
     public DonationController(DonationRepository donationRepository,
                               InstitutionRepository institutionRepository,
-                              CategoryRepository categoryRepository) {
+                              CategoryRepository categoryRepository,
+                              DonationStatusRepository donationStatusRepository) {
         this.donationRepository = donationRepository;
         this.institutionRepository = institutionRepository;
         this.categoryRepository = categoryRepository;
+        this.donationStatusRepository = donationStatusRepository;
     }
 
     @ModelAttribute("allCategories")
@@ -55,6 +59,7 @@ public class DonationController {
                                       @AuthenticationPrincipal CurrentUser customUser) {
         Donation donation = new Donation();
         donation.setUser(customUser.getUser());
+        donation.setDonationStatus(donationStatusRepository.findById(1));
         model.addAttribute("donation", donation);
         return "form";
     }
