@@ -66,6 +66,10 @@ public class Donation {
     @ManyToOne
     private User user;
 
+    @NotNull
+    @ManyToOne
+    private DonationStatus donationStatus;
+
 
     public Long getId() {
         return id;
@@ -151,6 +155,13 @@ public class Donation {
         this.user = user;
     }
 
+    public DonationStatus getDonationStatus() {
+        return donationStatus;
+    }
+    public void setDonationStatus(DonationStatus donationStatus) {
+        this.donationStatus = donationStatus;
+    }
+
     @Override
     public String toString() {
         return "Donation{" +
@@ -166,6 +177,7 @@ public class Donation {
                 ", pickUpTime=" + pickUpTime +
                 ", pickUpComment='" + pickUpComment + '\'' +
                 ", user=" + user +
+                ", donationStatus=" + donationStatus +
                 '}';
     }
 }
