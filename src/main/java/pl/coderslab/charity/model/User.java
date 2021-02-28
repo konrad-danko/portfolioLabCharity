@@ -36,7 +36,9 @@ public class User {
     @ManyToOne
     private Role role;
 
-    private int enabled;
+    @ManyToOne
+    private UserStatus userStatus;
+
 
     public Long getId() {
         return id;
@@ -80,11 +82,11 @@ public class User {
         this.role = role;
     }
 
-    public int getEnabled() {
-        return enabled;
+    public UserStatus getUserStatus() {
+        return userStatus;
     }
-    public void setEnabled(int enabled) {
-        this.enabled = enabled;
+    public void setUserStatus(UserStatus userStatus) {
+        this.userStatus = userStatus;
     }
 
     @Override
@@ -96,7 +98,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", role=" + role +
-                ", enabled=" + enabled +
+                ", userStatus=" + userStatus +
                 '}';
     }
 }
