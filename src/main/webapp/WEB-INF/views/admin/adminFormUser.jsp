@@ -24,15 +24,15 @@
                 <div class="d-flex mt-3">
                     <div class="form-group mx-2">
                         <label for="firstName">Imię:</label>
-                        <form:input path="firstName" id="firstName" class="form-control" readonly="true"/>
+                        <form:input path="firstName" id="firstName" class="form-control" disabled="${disabledParam}"/>
                     </div>
                     <div class="form-group mx-2 flex-grow-1">
                         <label for="lastName">Nazwisko:</label>
-                        <form:input path="lastName" id="lastName" class="form-control" readonly="true"/>
+                        <form:input path="lastName" id="lastName" class="form-control" disabled="${disabledParam}"/>
                     </div>
                     <div class="form-group mx-2 flex-grow-1">
                         <label for="email">Email:</label>
-                        <form:input path="email" id="email" class="form-control" readonly="true"/>
+                        <form:input path="email" id="email" class="form-control" disabled="${disabledParam}"/>
                     </div>
                     <div class="form-group mx-2 flex-grow-1">
                         <label for="role">Rola:</label>
