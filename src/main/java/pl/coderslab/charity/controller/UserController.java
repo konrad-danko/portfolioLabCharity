@@ -7,9 +7,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.charity.model.Role;
 import pl.coderslab.charity.model.User;
+import pl.coderslab.charity.model.UserStatus;
 import pl.coderslab.charity.repository.DonationRepository;
 import pl.coderslab.charity.repository.RoleRepository;
 import pl.coderslab.charity.repository.UserRepository;
+import pl.coderslab.charity.repository.UserStatusRepository;
 import pl.coderslab.charity.service.CurrentUser;
 
 import javax.validation.Valid;
@@ -23,14 +25,17 @@ public class UserController {
     private final DonationRepository donationRepository;
     private final RoleRepository roleRepository;
     private final DisplayParams displayParams;
+    private final UserStatusRepository userStatusRepository;
     public UserController(UserRepository userRepository,
                           DonationRepository donationRepository,
                           RoleRepository roleRepository,
-                          DisplayParams displayParams) {
+                          DisplayParams displayParams,
+                          UserStatusRepository userStatusRepository) {
         this.userRepository = userRepository;
         this.donationRepository = donationRepository;
         this.roleRepository = roleRepository;
         this.displayParams = displayParams;
+        this.userStatusRepository = userStatusRepository;
     }
 
     private final static String SHOW_ACTION_MSG = "Dane ";
@@ -50,12 +55,17 @@ public class UserController {
 
     @ModelAttribute("firstName")
     public String getFirstName(@AuthenticationPrincipal CurrentUser customUser){
-        return customUser==null ? "" :customUser.getUser().getFirstName();
+        return customUser==null ? "" :userRepository.findById(customUser.getUser().getId()).get().getFirstName();
     }
 
     @ModelAttribute("allRoles")
     public List<Role> getAllRoles(){
         return roleRepository.findAll();
+    }
+
+    @ModelAttribute("allUserStatuses")
+    public List<UserStatus> getAllUserStatuses() {
+        return userStatusRepository.findAll();
     }
 
     @GetMapping(path = "/showAllUsers/{roleId}")
@@ -117,13 +127,16 @@ public class UserController {
         return "admin/adminFormUser";
     }
     @PostMapping(path = "/deleteUser/{id}")
-    public String processDeleteUser(@ModelAttribute User user, @PathVariable long id) {
+    public String processDeleteUser(@ModelAttribute User user, 
+                                    @PathVariable long id,
+                                    @AuthenticationPrincipal CurrentUser customUser) {
+        boolean selfDeletion = customUser.getUser().getId()== userRepository.findById(id).get().getId();
         int userRoleId = userRepository.findById(id).get().getRole().getId();
         boolean hasAnyDonation = donationRepository.findAllByUser_Id(id).size()>0;
         //jeśli w bazie jest jeden jedyny admin to nie można go usunąć:
         boolean isAnAdmin = userRoleId==1;
         boolean isOnlyOneAdmin = userRepository.findAllUsersByRoleIdOrderedByLastName(1).size()==1;
-        if(hasAnyDonation || (isAnAdmin && isOnlyOneAdmin)){
+        if(selfDeletion || hasAnyDonation || (isAnAdmin && isOnlyOneAdmin)){
             return "redirect:/admin/user/showUser/"+id;
         }
         userRepository.delete(user);
