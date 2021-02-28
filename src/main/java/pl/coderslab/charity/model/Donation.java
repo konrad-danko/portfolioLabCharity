@@ -70,6 +70,13 @@ public class Donation {
     @ManyToOne
     private DonationStatus donationStatus;
 
+    private LocalDate created; //autoupdated by @PrePersist
+
+    @PrePersist
+    public void prePersist (){
+        created = LocalDate.now();
+    }
+
 
     public Long getId() {
         return id;
@@ -162,6 +169,13 @@ public class Donation {
         this.donationStatus = donationStatus;
     }
 
+    public LocalDate getCreated() {
+        return created;
+    }
+    public void setCreated(LocalDate created) {
+        this.created = created;
+    }
+
     @Override
     public String toString() {
         return "Donation{" +
@@ -178,6 +192,7 @@ public class Donation {
                 ", pickUpComment='" + pickUpComment + '\'' +
                 ", user=" + user +
                 ", donationStatus=" + donationStatus +
+                ", created=" + created +
                 '}';
     }
 }
