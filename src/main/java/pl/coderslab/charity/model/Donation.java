@@ -52,7 +52,6 @@ public class Donation {
     private String phoneNumber;
 
     @NotNull(message = "Wpisz datę odbioru darów")
-    @FutureOrPresent(message = "Data nie może być z przeszłości")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate pickUpDate; // (LocalDate)
 
