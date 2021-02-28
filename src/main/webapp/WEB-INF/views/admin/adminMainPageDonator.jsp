@@ -24,7 +24,6 @@
         <table class="table table-bordered table-hover table-smQQ shadow-lg">
             <thead class="bg-primary text-white">
             <tr>
-                <th>Id</th>
                 <th>Fundacja</th>
                 <th>Data odbioru</th>
                 <th>Status</th>
@@ -33,10 +32,9 @@
             <tbody>
             <c:forEach items="${allDonations}" var="donation">
                 <tr>
-                    <td><a href="/donator/donation/showDonation/${donation.id}" style="text-decoration: underline; color: blue">${donation.id}</a></td>
                     <td>${donation.institution.getName()}</td>
                     <td>${donation.pickUpDate}</td>
-                    <td>${donation.donationStatus.getDonationStatusName()}</td>
+                    <td><a href="/donation/showDonation/${donation.id}" style="text-decoration: underline; color: blue">${donation.donationStatus.getDonationStatusName()}</a></td>
                 </tr>
             </c:forEach>
             </tbody>
