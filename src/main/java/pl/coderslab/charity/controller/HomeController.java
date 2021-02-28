@@ -25,6 +25,12 @@ public class HomeController {
     @RequestMapping("/")
     public String homeAction(Model model, @AuthenticationPrincipal CurrentUser customUser){
 
+        int userStatusId = customUser==null ? 0 : customUser.getUser().getUserStatus().getId();
+        if(userStatusId==2){
+            SecurityContextHolder.clearContext();
+            return "redirect:/login";
+        }
+
         String firstName = customUser==null ? "" :customUser.getUser().getFirstName();
         int roleId = customUser==null ? 0 :customUser.getUser().getRole().getId();
 
