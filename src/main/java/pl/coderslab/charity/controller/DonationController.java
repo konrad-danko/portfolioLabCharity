@@ -4,13 +4,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import pl.coderslab.charity.model.Category;
-import pl.coderslab.charity.model.Donation;
-import pl.coderslab.charity.model.Institution;
+import org.springframework.web.bind.annotation.*;
+import pl.coderslab.charity.model.*;
 import pl.coderslab.charity.repository.CategoryRepository;
 import pl.coderslab.charity.repository.DonationRepository;
 import pl.coderslab.charity.repository.DonationStatusRepository;
@@ -28,14 +23,17 @@ public class DonationController {
     private final InstitutionRepository institutionRepository;
     private final CategoryRepository categoryRepository;
     private final DonationStatusRepository donationStatusRepository;
+    private final DisplayParams displayParams;
     public DonationController(DonationRepository donationRepository,
                               InstitutionRepository institutionRepository,
                               CategoryRepository categoryRepository,
-                              DonationStatusRepository donationStatusRepository) {
+                              DonationStatusRepository donationStatusRepository,
+                              DisplayParams displayParams) {
         this.donationRepository = donationRepository;
         this.institutionRepository = institutionRepository;
         this.categoryRepository = categoryRepository;
         this.donationStatusRepository = donationStatusRepository;
+        this.displayParams = displayParams;
     }
 
     @ModelAttribute("allCategories")
@@ -48,9 +46,24 @@ public class DonationController {
         return this.institutionRepository.findAllOrderedByName();
     }
 
+    @ModelAttribute("allDonationStatuses")
+    public List<DonationStatus> getAllDonationStatuses() {
+        return this.donationStatusRepository.findAll();
+    }
+
     @ModelAttribute("firstName")
     public String getFirstName(@AuthenticationPrincipal CurrentUser customUser){
         return customUser==null ? "" :customUser.getUser().getFirstName();
+    }
+
+    //show a donation
+    @GetMapping(path = "/showDonation/{id}")
+    public String showDonation(Model model, @PathVariable long id){
+        Donation donation = donationRepository.findById(id).orElse(null);
+        model.addAttribute("donation", donation);
+        model.addAttribute("headerMessage", "Szczegóły zbiórki");
+        displayParams.setShowParams(model);
+        return "admin/donatorFormDonation";
     }
 
     //add a donation
@@ -71,5 +84,28 @@ public class DonationController {
         }
         donationRepository.save(donation);
         return "form-confirmation";
+    }
+
+    //edit a donation
+    @GetMapping(path = "/editDonation/{id}")
+    public String initiateEditDonation(Model model, @PathVariable long id){
+        Donation donation = donationRepository.findById(id).orElse(null);
+        model.addAttribute("donation", donation);
+        model.addAttribute("headerMessage", "Edytuj status zbiórki");
+        displayParams.setAddEditParams(model);
+        return "admin/donatorFormDonation";
+    }
+    @PostMapping(path = "/editDonation/{id}")
+    public String processEditDonation(@ModelAttribute @Valid Donation donation,
+                                      BindingResult result,
+                                      Model model,
+                                      @PathVariable long id){
+        if(result.hasErrors()){
+            model.addAttribute("headerMessage", "Edytuj status zbiórki");
+            displayParams.setAddEditParams(model);
+            return "admin/donatorFormDonation";
+        }
+        donationRepository.save(donation);
+        return "redirect:/donation/showDonation/"+id;
     }
 }
