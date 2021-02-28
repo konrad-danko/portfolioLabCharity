@@ -30,6 +30,7 @@
                     <th>Imię</th>
                     <th>Nazwisko</th>
                     <th>Email</th>
+                    <th>Status</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -38,6 +39,7 @@
                         <td>${user.firstName}</td>
                         <td>${user.lastName}</td>
                         <td><a href="/admin/user/showUser/${user.id}">${user.email}</a></td>
+                        <td>${user.userStatus.getUserStatusName()}</td>
                     </tr>
                 </c:forEach>
                 </tbody>
