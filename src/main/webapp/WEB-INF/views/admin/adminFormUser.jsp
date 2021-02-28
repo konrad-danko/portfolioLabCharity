@@ -39,6 +39,11 @@
                         <form:select path="role" id="role" items="${allRoles}" itemLabel="roleName" itemValue="id" class="form-control" disabled="${disabledParam}"/>
                         <form:errors path="role" class="text-danger"/>
                     </div>
+                    <div class="form-group mx-2 flex-grow-1">
+                        <label for="userStatus">Status:</label>
+                        <form:select path="userStatus" id="userStatus" items="${allUserStatuses}" itemLabel="userStatusName" itemValue="id" class="form-control" disabled="${disabledParam}"/>
+                        <form:errors path="userStatus" class="text-danger"/>
+                    </div>
                 </div>
                 <br>
 
