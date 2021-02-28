@@ -18,16 +18,16 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark mt-1 rounded-lg">
     <ul class="navbar-nav">
         <li class="nav-item">
-            <a href="/" class="btn btn-info mx-2">Strona główna</a>
+            <a href="<c:url value="/"/>" class="btn btn-info mx-2">Strona główna</a>
         </li>
         <li class="nav-item">
-            <a href="/admin/institution/showAllInstitutions" class="btn btn-info mx-2">Fundacje</a>
+            <a href="<c:url value="/admin/institution/showAllInstitutions"/>" class="btn btn-info mx-2">Fundacje</a>
         </li>
         <li class="nav-item">
-            <a href="/admin/user/showAllUsers/1" class="btn btn-info mx-2">Administratorzy</a>
+            <a href="<c:url value="/admin/user/showAllUsers/1"/>" class="btn btn-info mx-2">Administratorzy</a>
         </li>
         <li class="nav-item">
-            <a href="/admin/user/showAllUsers/2" class="btn btn-info mx-2">Darczyńcy</a>
+            <a href="<c:url value="/admin/user/showAllUsers/2"/>" class="btn btn-info mx-2">Darczyńcy</a>
         </li>
     </ul>
 
@@ -38,7 +38,7 @@
             ${firstName}
         </button>
         <div class="dropdown-menu bg-primary">
-            <a href="/report/showInvoicedTransactions" class="dropdown-item">Edytuj profil</a>
+            <a href="<c:url value="/"/>" class="dropdown-item">Edytuj profil</a>
             <form action="<c:url value="/logout"/>" method="post" class="dropdown-item">
                 <input class="btn btn-sm btn-danger font-weight-bold ml-auto" type="submit" value="Wyloguj">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
