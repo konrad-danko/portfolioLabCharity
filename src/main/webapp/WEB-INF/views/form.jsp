@@ -206,6 +206,7 @@
                     </div>
 
                     <form:hidden path="user"/>
+                    <form:hidden path="donationStatus"/>
                 </form:form>
             </div>
         </section>
